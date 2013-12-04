@@ -5,6 +5,7 @@ import (
 	"regexp"
 	"net/http"
 	"io"
+	"html"
 )
 
 var httpRe = regexp.MustCompile("https?://[^ ]*")
@@ -26,7 +27,7 @@ func Handler(m message.Message) string {
 	}
 	defer resp.Body.Close()
 
-	buf := make([]byte, 512)
+	buf := make([]byte, 4096)
 	_, err = io.ReadFull(resp.Body, buf)
 
 	mtype := http.DetectContentType(buf)
@@ -39,6 +40,6 @@ func Handler(m message.Message) string {
 		return ""
 	}
 
-	title := matches[1]
+	title := html.UnescapeString(matches[1])
 	return "Site Title: " + title
 }
