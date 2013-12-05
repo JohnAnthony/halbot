@@ -1,7 +1,7 @@
 package uri_title
 
 import (
-	"halbot/message"
+	"github.com/JohnAnthony/halbot/message"
 	"regexp"
 	"net/http"
 	"io"

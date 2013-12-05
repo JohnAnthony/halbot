@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"net/textproto"
 	"container/list"
-	"halbot/message"
+	"github.com/JohnAnthony/halbot/message"
 )
 
 func min(a int, b int) int {
