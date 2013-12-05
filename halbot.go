@@ -74,7 +74,6 @@ func (hb *HALBot) Run() {
 
 	hb.SendRaw("USER " + hb.nick + " 8 * :" + hb.nick)
 	hb.SendRaw("NICK " + hb.nick)
-	hb.SendRaw("JOIN " + hb.channel)
 
 	reader := bufio.NewReader(hb.conn)
 	tp := textproto.NewReader(reader)
@@ -86,7 +85,7 @@ func (hb *HALBot) Run() {
 		}
 		fmt.Printf("<< %s\n", line)
 
-		// Special Cases
+		// Special Case for PING -> PONG
 		if (line[0:4] == "PING") {
 			hb.SendRaw("PONG" + line[4:])
 			continue
@@ -94,6 +93,12 @@ func (hb *HALBot) Run() {
 
 		// Get out message
 		msg := message.LineToMessage(line)
+
+		// Special Cases
+		// Join the channel after end of MOTD "376"
+		if (msg.Type == "376") {
+			hb.SendRaw("JOIN " + hb.channel)
+		}
 
 		// Ignore private messages
 		if (msg.To != hb.channel) {

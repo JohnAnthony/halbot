@@ -1,8 +1,8 @@
 package main
 
 import (
-	"halbot"
-	"halbot/uri_title"
+	"github.com/JohnAnthony/halbot"
+	"github.com/JohnAnthony/halbot/uri_title"
 )
 
 func main() {
