@@ -98,8 +98,8 @@ func (hb *HALBot) Run() {
 		// Join the channel after end of MOTD "376"
 		if (msg.Type == "376") {
 			hb.SendRaw("JOIN " + hb.channel)
+			continue
 		}
-
 		// Ignore private messages
 		if (msg.To != hb.channel) {
 			continue
