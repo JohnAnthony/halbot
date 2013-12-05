@@ -9,7 +9,7 @@ import (
 )
 
 var httpRe = regexp.MustCompile("https?://[^ ]*")
-var titleRe = regexp.MustCompile("<title>(?P<want>.*)</title>")
+var titleRe = regexp.MustCompile("<title>\\s*(?P<want>.*)\\s*</title>")
 
 func Handler(m message.Message) string {
 	if m.Type != "PRIVMSG" {
@@ -32,7 +32,7 @@ func Handler(m message.Message) string {
 
 	mtype := http.DetectContentType(buf)
 	if len(mtype) < 9 || mtype[0:9] != "text/html" {
-		return "MIME Type: " + mtype
+		return ""
 	}
 
 	matches := titleRe.FindStringSubmatch(string(buf))
@@ -41,5 +41,5 @@ func Handler(m message.Message) string {
 	}
 
 	title := html.UnescapeString(matches[1])
-	return "Site Title: " + title
+	return "Site Title :: " + title
 }
