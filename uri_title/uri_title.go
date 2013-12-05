@@ -8,7 +8,7 @@ import (
 	"html"
 )
 
-var httpRe = regexp.MustCompile("https?://[^ ]*")
+var httpRe = regexp.MustCompile("https?://[^\\s]*")
 var titleRe = regexp.MustCompile("<title>\\s*(?P<want>.*)\\s*</title>")
 
 func Handler(m message.Message) string {
