@@ -29,14 +29,13 @@ type HALBot struct {
 }
 
 func NewHALBot(nick string, uri string, port int, channel string) (*HALBot) {
-	hb := HALBot {
+	return &HALBot {
 		nick: nick,
 		user: "HALBot",
 		port: port,
 		server: uri,
 		channel: channel,
 	}
-	return &hb
 }
 
 func (hb *HALBot) AddHandler(handler func(message.Message) string) {
