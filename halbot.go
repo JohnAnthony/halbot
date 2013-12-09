@@ -64,8 +64,8 @@ func (hb *HALBot) disconnect() {
 }
 
 func (hb *HALBot) SendToChannel(in string) {
-	msg := strings.Replace(in, "\r", "", -1)
-	msg = strings.Replace(msg, "\n", "", -1)
+	msg := strings.Replace(in, "\r", " | ", -1)
+	msg = strings.Replace(msg, "\n", " | ", -1)
 	msg = ":" + hb.nick + " PRIVMSG " + hb.channel + " :" + msg
 	hb.SendRaw(msg)
 }
