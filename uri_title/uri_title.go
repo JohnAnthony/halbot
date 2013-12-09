@@ -6,10 +6,11 @@ import (
 	"net/http"
 	"io"
 	"html"
+	"strings"
 )
 
 var httpRe = regexp.MustCompile("https?://[^\\s]*")
-var titleRe = regexp.MustCompile("<title>\\s*(?P<want>[.^\\r]*)\\s*</title>")
+var titleRe = regexp.MustCompile("<title>\\s*(?P<want>.*)\\s*</title>")
 
 func Handler(m message.Message) string {
 	if m.Type != "PRIVMSG" {
@@ -41,5 +42,6 @@ func Handler(m message.Message) string {
 	}
 
 	title := html.UnescapeString(matches[1])
+	strings.Join(strings.Fields(title), " ")
 	return "Site Title :: " + title
 }
