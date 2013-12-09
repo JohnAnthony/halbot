@@ -9,7 +9,7 @@ import (
 )
 
 var httpRe = regexp.MustCompile("https?://[^\\s]*")
-var titleRe = regexp.MustCompile("<title>\\s*(?P<want>.*)\\s*</title>")
+var titleRe = regexp.MustCompile("<title>\\s*(?P<want>[.^\\r]*)\\s*</title>")
 
 func Handler(m message.Message) string {
 	if m.Type != "PRIVMSG" {
