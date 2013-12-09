@@ -42,6 +42,6 @@ func Handler(m message.Message) string {
 	}
 
 	title := html.UnescapeString(matches[1])
-	strings.Join(strings.Fields(title), " ")
+	title = strings.Join(strings.Fields(title), "[^\\r\\n]")
 	return "Site Title :: " + title
 }
