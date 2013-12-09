@@ -9,7 +9,7 @@ import (
 )
 
 var httpRe = regexp.MustCompile("https?://[^\\s]*")
-var titleRe = regexp.MustCompilePOSIX("<title>\\s*(?P<want>[[:print:]]*)\\s*</title>")
+var titleRe = regexp.MustCompile("<title>\\s*(?P<want>[[:printable:]]*)\\s*</title>")
 
 func Handler(m message.Message) string {
 	if m.Type != "PRIVMSG" {
@@ -40,5 +40,6 @@ func Handler(m message.Message) string {
 		return ""
 	}
 
+	title := html.UnescapeString(matches[1])
 	return "Site Title :: " + title
 }
