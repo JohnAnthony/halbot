@@ -6,10 +6,11 @@ import (
 	"net/http"
 	"io"
 	"html"
+	"strings"
 )
 
 var httpRe = regexp.MustCompile("https?://[^\\s]*")
-var titleRe = regexp.MustCompile("<title>\\s*(?P<want>[^\\r\\n]*)\\s*</title>")
+var titleRe = regexp.MustCompile("<title>\\s*(?P<want>.*)\\s*</title>")
 
 func Handler(m message.Message) string {
 	if m.Type != "PRIVMSG" {
@@ -41,5 +42,10 @@ func Handler(m message.Message) string {
 	}
 
 	title := html.UnescapeString(matches[1])
+
+	// strip out newlines
+	title = strings.Replace(strings.Replace(title, "\r", "", -1), "\n", "", -1);
+
 	return "Site Title :: " + title
 }
+
