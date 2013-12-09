@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"io"
 	"html"
-	"strings"
 )
 
 var httpRe = regexp.MustCompile("https?://[^\\s]*")
